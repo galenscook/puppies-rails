@@ -1,0 +1,26 @@
+<h1>log in</h1>
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id='error_explanation'>
+      <h2>
+        your login information was incorrect.  puppies don't like hackers.
+      </h2>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.submit "log in"%>
+  </p>
+
+<% end %>

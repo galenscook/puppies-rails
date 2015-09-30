@@ -1,14 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PuppiesRails</title>
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 
+    normalize.css removes cross-browser differences in defaults, e.g.,
+    differences in how form elements appear between Firefox and IE
+    See: http://necolas.github.com/normalize.css/
+  -->
+  <link rel="stylesheet" href="/css/normalize.css">
+
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+  <!--
+    application.css is where you put your styles
+  -->
+  <link rel="stylesheet" href="/css/application.css" type='text/css'>
+
+  <!-- Font awesome -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Righteous|Gochi+Hand' rel='stylesheet' type='text/css'>
+
+<!-- Images Loaded -->
+
+  <script type="text/javascript" src='/js/imagesLoaded.js'></script>
+  <script type="text/javascript" src="/js/facebookSdk.js"></script>
+  <script type="text/javascript" src="/js/scrollend.js"></script>
+  <script type="text/javascript" src="/js/application.js"></script>
+
+
+  <title>allthepuppies</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div id="lightbox-background" style='display:none;'></div>
+  <header>
+  <nav class='navbar navbar-default'>
+    <div class='col-md-10 col-md-offset-1'>
+      <div class='container-fluid'>
+      <div class='navbar-header'>
+        <a class='navbar-brand' href='/photos'>all the <span>puppies</span></a>
+        <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#main-navbar-collapse' aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class='collapse navbar-collapse' id='main-navbar-collapse'>
+        <ul class='nav navbar-nav navbar-right'>
+          <li><a href="/photos/new" class='attention'>add puppy</a></li>
+          <%if is_authenticated?%>
+            <%if is_admin? %>
+              <li><a href='/admin'>admin dashboard</a></li>
+            <%end%>
+            <li><a href='/users/<%=current_user.id%>'>my profile</a></li>
+            <li><a href='/users/logout'>log out</a></li>
+          <%else%>
+            <li><a href='/users/new' class='call-form'>sign up</a></li>
+            <li><a href='/users/login' class='call-form'>log in</a></li>
+          <%end%>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </nav>
+    
+  </header>
 
-<%= yield %>
-
+  <div class='main container-fluid col-md-10 col-md-offset-1'>
+  <%= yield %>
+  </div>
+  <script type='text/javascript' src='/js/salvattore.js'></script>
 </body>
 </html>
