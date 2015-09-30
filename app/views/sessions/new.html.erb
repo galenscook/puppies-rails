@@ -1,13 +1,7 @@
 <h1>log in</h1>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div id='error_explanation'>
-      <h2>
-        your login information was incorrect.  puppies don't like hackers.
-      </h2>
-    </div>
-  <% end %>
+<%= form_for :session, url: login_path do |f| %>
+
 
   <p>
     <%= f.label :username %><br>

@@ -3,12 +3,6 @@
 <head>
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- 
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="/css/normalize.css">
 
 
   <!-- Latest compiled and minified CSS -->
@@ -22,10 +16,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
-  <!--
-    application.css is where you put your styles
-  -->
-  <link rel="stylesheet" href="/css/application.css" type='text/css'>
 
   <!-- Font awesome -->
 
@@ -33,12 +23,7 @@
 
   <link href='https://fonts.googleapis.com/css?family=Righteous|Gochi+Hand' rel='stylesheet' type='text/css'>
 
-<!-- Images Loaded -->
 
-  <script type="text/javascript" src='/js/imagesLoaded.js'></script>
-  <script type="text/javascript" src="/js/facebookSdk.js"></script>
-  <script type="text/javascript" src="/js/scrollend.js"></script>
-  <script type="text/javascript" src="/js/application.js"></script>
 
 
   <title>allthepuppies</title>
@@ -65,14 +50,14 @@
         <ul class='nav navbar-nav navbar-right'>
           <li><a href="/photos/new" class='attention'>add puppy</a></li>
           <%if is_authenticated?%>
-            <%if is_admin? %>
+            <!-- <#%if is_admin? %>
               <li><a href='/admin'>admin dashboard</a></li>
-            <%end%>
+            <#%end%> -->
             <li><a href='/users/<%=current_user.id%>'>my profile</a></li>
-            <li><a href='/users/logout'>log out</a></li>
+            <li><%= link_to "log out", logout_path, method:"delete"%></li>
           <%else%>
             <li><a href='/users/new' class='call-form'>sign up</a></li>
-            <li><a href='/users/login' class='call-form'>log in</a></li>
+            <li><%= link_to "log in", login_path%></li>
           <%end%>
         </ul>
       </div>
@@ -85,6 +70,5 @@
   <div class='main container-fluid col-md-10 col-md-offset-1'>
   <%= yield %>
   </div>
-  <script type='text/javascript' src='/js/salvattore.js'></script>
 </body>
 </html>
