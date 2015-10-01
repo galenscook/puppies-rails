@@ -32,12 +32,20 @@ class PhotosController < ApplicationController
     else
       @photo = Photo.find_by(url: params[:url])
       @hearts = @photo.hearts.all.order(created_at: :desc)
-      flash.now[:notice] = "Someone else beat you to this one!  Here it is."
+      flash.now[:notice] = "someone else beat you to this one!  here it is."
       render 'show'
     end
   end
 
   def destroy
+    if !is_admin?
+      flash.now[:error] = 'you don\'t have access to this area.  sorry.'
+      render 'index'
+    else
+      photo = Photo.find(params[:id])
+      photo.destroy
+      redirect_to :root
+    end
   end
 
   private

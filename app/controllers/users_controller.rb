@@ -19,6 +19,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    if request.xhr?
+      render 'new', layout: false
+    end
   end
 
   def edit
