@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :photos, only: [:index, :new, :create, :show, :destroy]
-
+  resources :hearts, only: [:create, :destroy]
   
 
   # resource :photos do

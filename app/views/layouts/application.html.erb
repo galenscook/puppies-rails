@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Mobile Specific Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
 
 
   <!-- Font awesome -->
@@ -53,11 +39,11 @@
             <!-- <#%if is_admin? %>
               <li><a href='/admin'>admin dashboard</a></li>
             <#%end%> -->
-            <li><a href='/users/<%=current_user.id%>'>my profile</a></li>
+            <li><%= link_to 'my profile', user_path(current_user) %></li>
             <li><%= link_to "log out", logout_path, method:"delete"%></li>
           <%else%>
-            <li><a href='/users/new' class='call-form'>sign up</a></li>
-            <li><%= link_to "log in", login_path%></li>
+            <li><%= link_to 'sign up', new_user_path, class:'call-form' %></li>
+            <li><%= link_to "log in", login_path, class: 'call-form'%></li>
           <%end%>
         </ul>
       </div>
@@ -66,9 +52,16 @@
   </nav>
     
   </header>
-
   <div class='main container-fluid col-md-10 col-md-offset-1'>
+  <% if !flash[:notice].nil? && !flash[:error].nil? %>  
+    <div class = 'panel flash-area'>
+      <% flash.each do |name, msg| -%>
+        <p><%= content_tag :div, msg, class: name %></p>
+      <% end -%>
+    </div>
+  <% end %>
   <%= yield %>
   </div>
+  <script type="text/javascript" src='/assets/salvattore.js'></script>
 </body>
 </html>

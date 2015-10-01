@@ -1,0 +1,32 @@
+<div class='text-center'>
+  <div class='panel' style='border: none;'>
+    <% if @errors %>
+      <h3><%= @errors %></h3>
+    <% end %>
+  </div>
+<div class='panel panel-primary photo single' id='photo<%=@photo.id%>'>
+  <div class='panel-body'><img src='<%= @photo.url%>' class='img-responsive' /></div>
+  <div class='panel-footer'>
+  <%= render partial: '/hearts/heart_buttons', locals: {photo: @photo} %>
+  </div>
+  <ul class='list-group comments'>
+    <% @hearts.each do |heart| %>
+      <%if heart.comment != nil && heart.comment != ''%>
+        <li class='list-group-item' id="<%= heart.id%>">
+          <div><p><i class='fa fa-quote-left up'></i>&#9;<%=heart.comment%>   <i class='fa fa-quote-right down'></i>
+                -- <a href='/users/<%=heart.user_id%>'><%=heart.user.username%></a></p>
+
+        </div>
+        <% if is_authenticated? %>
+          <% if is_admin? %>
+            <div class='admin-delete left'>
+              <a href="/hearts/<%=heart.id%>/delete">Delete Comment</a>
+            </div>
+          <%end%>
+        <%end%>
+        </li>
+      <%end %>
+    <% end %>
+  </ul>
+</div>
+</div>

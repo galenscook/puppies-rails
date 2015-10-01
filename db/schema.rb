@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930010458) do
+ActiveRecord::Schema.define(version: 20150930181229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hearts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "hearts", ["photo_id"], name: "index_hearts_on_photo_id", using: :btree
+  add_index "hearts", ["user_id"], name: "index_hearts_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.string   "url"
@@ -29,4 +40,6 @@ ActiveRecord::Schema.define(version: 20150930010458) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "hearts", "photos"
+  add_foreign_key "hearts", "users"
 end

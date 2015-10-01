@@ -11,12 +11,14 @@ class SessionsController < ApplicationController
       log_in @user
       redirect_to @user
     else
+      flash.now[:notice] = 'your login information was incorrect. puppies don\'t like hackers.'
       render 'new'
     end
   end
 
   def destroy
     log_out
+    flash[:notice] = 'you have successfully logged out.'
     redirect_to root_url
   end
 

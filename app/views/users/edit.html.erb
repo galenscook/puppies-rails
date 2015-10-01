@@ -1,1 +1,47 @@
-edit.html.erb
+<h1>edit profile</h1>
+
+<%= form_for @user, html:{class:'col-md-4 col-md-offset-4'} do |f| %>
+  <% if @user.errors.any? %>
+    <div id='error_explanation'>
+      <h2>
+        sorry, you had <%= pluralize(@user.errors.count, 'error') %> that kept you from editing your account:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @old_password_error %>
+    <div id='error_explanation'>
+    <p><%=@old_password_error%></p>
+    </div>
+  <% end %>
+
+  <div class='form-group'>
+    <%= f.label :username, 'username' %><br>
+    <%= f.text_field :username, class:'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :password_old, 'old password' %><br>
+    <%= f.password_field :password_old, class:'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :password_new, 'new password' %><br>
+    <%= f.password_field :password, class:'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :password_confirmation, 'confirm new password' %><br>
+    <%= f.password_field :password_confirmation, class:'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit 'update profile', class:'btn btn-default' %>
+    <span class='right'><%= button_to 'delete profile', user_path(@user), method: :delete, data: {confirm: 'are you sure?'}, class:'btn btn-default' %></span>
+  </div>
+
+<% end %>

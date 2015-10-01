@@ -47,3 +47,5 @@ end
 
 #Access Font Awesome
 gem 'font-awesome-rails'
+
+gem 'bootstrap-sass', '~> 3.3.5.1'

@@ -1,1 +1,32 @@
-HELLO
+<% if is_authenticated? %>
+  <%if current_user.id == @user.id %>
+    <h1>hello, <%= @user.username %>!<span class='right'><a href="/users/<%=@user.id%>/edit"><button class='btn btn-default'>edit profile</button></a></span></h1>
+    
+    <h4>your current puppy hearts:</h4>
+  <%else%>
+    <h1><%= @user.username %>'s profile</h1>
+    <% if is_admin? %>
+      <form method='post' action="/users/<%=@user.id%>">
+        <input type='hidden' name='_method' value='delete'>
+        <input type='submit' value='Delete Profile' class='btn btn-default'>
+      </form>
+    <%end%>
+    <h4>current puppy hearts:</h4>
+  <%end%>
+
+    
+<%else%>
+  <h1><%= @user.username %>'s profile</h1>
+  <h4>current puppy hearts:</h4>
+<%end%>
+<div id="columns" data-columns=''>
+  <% @photos.each do |heart| %>
+    <div class='panel panel-primary photo' id='photo<%=heart.photo_id%>'>
+      <div class='panel-body'><a href = '/photos/<%=heart.photo_id%>'><img src='<%= heart.photo.url%>' class='img-responsive' /></a></div>
+      <div class='panel-footer'>
+      <%= render '/hearts/grid_hearts', locals: {photo: heart.photo} %>
+      </div>
+    </div>
+  <%end%>
+</div>
+
